@@ -1,22 +1,42 @@
-<!doctype html>
-<html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
-	</head>
-	<body>
-		<slot />
-	</body>
-</html>
+---
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import Sidebar from "../components/Sidebar.astro";
+import "../styles/global.css";
+---
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <title>Pulso Económico</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="min-h-screen flex flex-col bg-gray-50">
+  <!-- Header -->
+  <Header />
 
-<style>
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
-	}
-</style>
+  <!-- Contenido principal con sidebar -->
+  <div class="flex-1 flex flex-col md:flex-row">
+    <!-- 
+      Main content - Se muestra PRIMERO en móvil (orden 2)
+      md: Orden 1 (primera columna) y ancho 70%
+    -->
+    <main class="order-2 md:order-1 md:w-7/12 lg:w-8/12 p-4 bg-white">
+      <slot />
+    </main>
+
+    <!-- 
+      Sidebar - Se muestra SEGUNDO en móvil (orden 1)
+      md: Orden 2 (segunda columna) y ancho 30%
+    -->
+    <aside class="order-1 md:order-2 md:w-5/12 lg:w-4/12 p-4 bg-gray-200">
+      <Sidebar />
+    </aside>
+  </div>
+
+  <!-- Footer -->
+  <Footer />
+</body>
+</html>
