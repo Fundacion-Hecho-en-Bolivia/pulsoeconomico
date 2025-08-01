@@ -2,7 +2,7 @@
   <!-- Topbar -->
   <section class="bg-red-600 text-white py-1 px-4">
     <div class="container mx-auto flex justify-end">
-      <a href="https://fundacion.vercel.app/" class="text-xs hover:underline">Fundación Hecho en Bolivia</a>
+      <a href="https://fundacion.vercel.app/" class="text-sm md:text-lg font-medium hover:underline">Fundación Hecho en Bolivia</a>
     </div>
   </section>
 
@@ -16,14 +16,14 @@
     <!-- Menú de navegación (visible en desktop) -->
     <div class="hidden md:flex space-x-6">
       <a href="#" class="hover:text-blue-600 font-medium">Publicidad</a>
-      <a href="#" class="hover:text-blue-600 font-medium">Indicadores</a>
-      <a href="/pdf/EVOLUCION DEL SALARIO MINIMO.pdf" class="hover:text-blue-600 font-medium">Evolucion del SMN</a>
-      <a href="" class="hover:text-blue-600 font-medium">IPC Paises Vecinos</a>
+      <a href="/pdf/indicadores.pdf" class="hover:text-blue-600 font-medium">Indicadores</a>
+      <a href="/pdf/salariominimo.pdf" class="hover:text-blue-600 font-medium">Evolucion del SMN</a>
+      <a href="/pdf/ipc.pdf" class="hover:text-blue-600 font-medium">IPC Paises Vecinos</a>
     </div>
 
     <!-- Botón suscribirse -->
     <div class="flex items-center">
-      <button class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md font-medium hidden md:block">
+      <button class="bg-orange-600 hover:bg-orange-700 text-white px-4 py-2 rounded-md font-medium hidden md:block">
         Suscríbete
       </button>
       <!-- Botón menú móvil -->
@@ -36,21 +36,23 @@
   </nav>
 
   <!-- Segundo navbar (opcional) -->
-  <section class="bg-gray-100 py-2 px-4 hidden md:block">
+  <section class="bg-green-700 py-2 px-4 hidden md:block">
     <div class="container mx-auto flex justify-center space-x-8">
-      <a href="#" class="text-gray-700 hover:text-blue-600">Categoría 1</a>
-      <a href="#" class="text-gray-700 hover:text-blue-600">Categoría 2</a>
-      <a href="#" class="text-gray-700 hover:text-blue-600">Categoría 3</a>
-      <a href="#" class="text-gray-700 hover:text-blue-600">Categoría 4</a>
+      <a href="#" class="text-white hover:text-blue-600">Noticias</a>
+      <a href="/pdf/tablacotizaciones.pdf" class="text-white hover:text-blue-600">Cotizacion</a>
+      <a href="/Articulos" class="text-white hover:text-blue-600">Articulos</a>
+      <a href="/pdf/lectura.pdf" class="text-white hover:text-blue-600">Lectura 2 Minutos</a>
+      <a href="/precios" class="text-white hover:text-blue-600">Precios Internacionales</a>
+      <a href="/pdf/cargassociales.pdf" class="text-white hover:text-blue-600">Cargas Sociales</a>
     </div>
   </section>
 
   <!-- Menú móvil (hidden por defecto) -->
   <div id="mobile-menu" class="md:hidden hidden bg-white border-t">
     <div class="px-2 pt-2 pb-3 space-y-1">
-      <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50">Inicio</a>
-      <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50">Servicios</a>
-      <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50">Nosotros</a>
+      <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50">Publicidad</a>
+      <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50">Indicadores</a>
+      <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50">Evolucion del SMN</a>
       <a href="/pdf/CARGAS SOCIALES ....pdf" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50">Cargas Sociales</a>
       <button class="w-full text-left px-3 py-2 rounded-md text-base font-medium text-blue-600 hover:bg-blue-50">Suscríbete</button>
     </div>
