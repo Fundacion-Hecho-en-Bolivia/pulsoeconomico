@@ -1,3 +1,6 @@
+---
+import ContactModal from "./ContactModal.astro";
+---
 <header class="bg-white shadow-md">
   <!-- Topbar -->
   <section class="bg-red-600 text-white py-1 px-4">
@@ -15,7 +18,11 @@
 
     <!-- Menú de navegación (visible en desktop) -->
     <div class="hidden md:flex space-x-6">
-      <a href="#" class="hover:text-blue-600 font-medium">Publicidad</a>
+      <a href="#"
+         class="hover:text-blue-600 font-medium"
+         onclick="document.getElementById('contact-modal').classList.remove('hidden')">
+        Publicidad
+      </a>
       <a href="/pdf/indicadores.pdf" class="hover:text-blue-600 font-medium">Indicadores</a>
       <a href="/pdf/salariominimo.pdf" class="hover:text-blue-600 font-medium">Evolucion del SMN</a>
       <a href="/pdf/ipc.pdf" class="hover:text-blue-600 font-medium">IPC Paises Vecinos</a>
@@ -50,13 +57,19 @@
   <!-- Menú móvil (hidden por defecto) -->
   <div id="mobile-menu" class="md:hidden hidden bg-white border-t">
     <div class="px-2 pt-2 pb-3 space-y-1">
-      <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50">Publicidad</a>
+      <a href="#publicidad"
+         class="block px-3 py-2..."
+         onclick="event.preventDefault(); document.getElementById('contact-modal').classList.remove('hidden')">
+        Publicidad
+      </a>
       <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50">Indicadores</a>
       <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50">Evolucion del SMN</a>
       <a href="/pdf/CARGAS SOCIALES ....pdf" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50">Cargas Sociales</a>
       <button class="w-full text-left px-3 py-2 rounded-md text-base font-medium text-blue-600 hover:bg-blue-50">Suscríbete</button>
     </div>
   </div>
+  <ContactModal />
+
 </header>
 
 <script>
