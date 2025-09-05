@@ -1,6 +1,7 @@
 ---
 import ContactModal from "./ContactModal.astro";
 ---
+
 <header class="bg-white shadow-md">
   <!-- Topbar -->
   <section class="bg-red-600 text-white py-1 px-4">
@@ -10,10 +11,10 @@ import ContactModal from "./ContactModal.astro";
   </section>
 
   <!-- Navbar principal -->
-  <nav class="bg-yellow-400  mx-auto px-4 py-4 flex justify-between items-center">
+  <nav class="bg-yellow-400 mx-auto px-4 py-4 flex justify-between items-center">
     <!-- Logo -->
     <div class="flex items-center">
-      <img src="/logo.png" alt="Logo" class="h-10">
+      <img src="/logo.png" alt="Logo" class="h-14">
     </div>
 
     <!-- Menú de navegación (visible en desktop) -->
@@ -54,22 +55,32 @@ import ContactModal from "./ContactModal.astro";
     </div>
   </section>
 
-  <!-- Menú móvil (hidden por defecto) -->
+  <!-- Menú móvil (hidden por defecto) - ACTUALIZADO -->
   <div id="mobile-menu" class="md:hidden hidden bg-white border-t">
     <div class="px-2 pt-2 pb-3 space-y-1">
+      <!-- Enlaces del primer navbar -->
       <a href="#publicidad"
-         class="block px-3 py-2..."
+         class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50"
          onclick="event.preventDefault(); document.getElementById('contact-modal').classList.remove('hidden')">
         Publicidad
       </a>
-      <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50">Indicadores</a>
-      <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50">Evolucion del SMN</a>
-      <a href="/pdf/CARGAS SOCIALES ....pdf" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50">Cargas Sociales</a>
+      <a href="/pdf/indicadores.pdf" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50">Indicadores</a>
+      <a href="/pdf/salariominimo.pdf" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50">Evolucion del SMN</a>
+      <a href="/pdf/ipc.pdf" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50">IPC Paises Vecinos</a>
+      
+      <!-- Enlaces del segundo navbar -->
+      <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50">Noticias</a>
+      <a href="/pdf/tablacotizaciones.pdf" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50">Cotizacion</a>
+      <a href="/Articulos" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50">Articulos</a>
+      <a href="/pdf/lectura.pdf" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50">Lectura 2 Minutos</a>
+      <a href="/precios" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50">Precios Internacionales</a>
+      <a href="/pdf/cargassociales.pdf" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50">Cargas Sociales</a>
+      
       <button class="w-full text-left px-3 py-2 rounded-md text-base font-medium text-blue-600 hover:bg-blue-50">Suscríbete</button>
     </div>
   </div>
+  
   <ContactModal />
-
 </header>
 
 <script>
@@ -79,4 +90,3 @@ import ContactModal from "./ContactModal.astro";
     menu.classList.toggle('hidden');
   });
 </script>
-
