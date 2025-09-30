@@ -3,6 +3,19 @@ import ContactModal from "./ContactModal.astro";
 ---
 
 <header class="bg-white shadow-md">
+    <!-- Sección de publicidad con carousel -->
+  <section class="publi flex justify-center items-center bg-gray-100 py-2">
+    <div class="carousel-container relative w-full max-w-[1275px] h-[150px] overflow-hidden">
+      <div id="carousel" class="carousel-slides flex transition-transform duration-500 ease-in-out">
+        <!-- Las imágenes se cargarán dinámicamente con JavaScript -->
+      </div>
+      <!-- Indicadores del carousel -->
+      <div class="carousel-indicators absolute bottom-2 left-1/2 transform -translate-x-1/2 flex space-x-2">
+        <button class="carousel-indicator w-3 h-3 rounded-full bg-white bg-opacity-50 border border-white" data-index="0"></button>
+        <button class="carousel-indicator w-3 h-3 rounded-full bg-white bg-opacity-50 border border-white" data-index="1"></button>
+      </div>
+    </div>
+  </section>
   <!-- Topbar -->
   <section class="bg-red-600 text-white py-1 px-4">
     <div class="container mx-auto flex justify-end">
@@ -88,5 +101,111 @@ import ContactModal from "./ContactModal.astro";
   document.getElementById('mobile-menu-button').addEventListener('click', function() {
     const menu = document.getElementById('mobile-menu');
     menu.classList.toggle('hidden');
+  });
+
+
+  // Toggle mobile menu
+  document.getElementById('mobile-menu-button').addEventListener('click', function() {
+    const menu = document.getElementById('mobile-menu');
+    menu.classList.toggle('hidden');
+  });
+
+  // Carousel functionality
+  document.addEventListener('DOMContentLoaded', function() {
+    const carousel = document.getElementById('carousel');
+    const indicators = document.querySelectorAll('.carousel-indicator');
+
+    // RUTAS ACTUALIZADAS - Ajusta las extensiones según tus imágenes
+    const images = [
+      '/banner1.jpg',  // o .png, .webp, etc.
+      '/banner2.png'   // o .png, .webp, etc.
+    ];
+
+    // Crear elementos de imagen
+    images.forEach((imgSrc, index) => {
+      const img = document.createElement('img');
+      img.src = imgSrc;
+      img.alt = `Banner ${index + 1}`;
+      img.className = 'min-w-full h-[150px] object-cover';
+      carousel.appendChild(img);
+    });
+
+    // Resto del código del carousel (igual que antes)...
+    // Clonar la primera y última imagen para efecto infinito
+    const firstClone = carousel.children[0].cloneNode(true);
+    const lastClone = carousel.children[carousel.children.length - 1].cloneNode(true);
+
+    carousel.appendChild(firstClone);
+    carousel.insertBefore(lastClone, carousel.firstChild);
+
+    let currentIndex = 1; // Comenzar en el primer elemento real (no el clon)
+    const totalSlides = images.length;
+    const slideWidth = 100; // Porcentaje
+
+    // Posicionar inicialmente el carousel
+    carousel.style.transform = `translateX(-${currentIndex * slideWidth}%)`;
+
+    // Función para actualizar el carousel
+    function updateCarousel() {
+      carousel.style.transition = 'transform 0.5s ease-in-out';
+      carousel.style.transform = `translateX(-${currentIndex * slideWidth}%)`;
+
+      // Actualizar indicadores
+      indicators.forEach((indicator, index) => {
+        if (index === (currentIndex - 1 + totalSlides) % totalSlides) {
+          indicator.classList.remove('bg-opacity-50');
+          indicator.classList.add('bg-white');
+        } else {
+          indicator.classList.remove('bg-white');
+          indicator.classList.add('bg-opacity-50');
+        }
+      });
+    }
+
+    // Función para ir al slide específico
+    function goToSlide(index) {
+      currentIndex = index + 1; // +1 por el clon inicial
+      updateCarousel();
+    }
+
+    // Función para siguiente slide
+    function nextSlide() {
+      currentIndex++;
+      updateCarousel();
+
+      // Si llegamos al final (el clon), reposicionar sin animación
+      if (currentIndex === totalSlides + 1) {
+        setTimeout(() => {
+          carousel.style.transition = 'none';
+          currentIndex = 1;
+          carousel.style.transform = `translateX(-${currentIndex * slideWidth}%)`;
+        }, 500);
+      }
+    }
+
+    // Función para slide anterior
+    function prevSlide() {
+      currentIndex--;
+      updateCarousel();
+
+      // Si llegamos al inicio (el clon), reposicionar sin animación
+      if (currentIndex === 0) {
+        setTimeout(() => {
+          carousel.style.transition = 'none';
+          currentIndex = totalSlides;
+          carousel.style.transform = `translateX(-${currentIndex * slideWidth}%)`;
+        }, 500);
+      }
+    }
+
+    // Event listeners para los indicadores
+    indicators.forEach((indicator, index) => {
+      indicator.addEventListener('click', () => {
+        goToSlide(index);
+      });
+    });
+
+    // Cambio automático cada 5 segundos
+    setInterval(nextSlide, 5000);
   });
 </script>
