@@ -5,14 +5,14 @@ import ContactModal from "./ContactModal.astro";
 <header class="bg-white shadow-md">
     <!-- Sección de publicidad con carousel -->
   <section class="publi flex justify-center items-center bg-gray-100 py-2">
-    <div class="carousel-container relative w-full max-w-[1275px] h-[150px] overflow-hidden">
+    <div class="carousel-container relative w-full max-w-[1275px] h-[90px] md:h-[150px] overflow-hidden">
       <div id="carousel" class="carousel-slides flex transition-transform duration-500 ease-in-out">
         <!-- Las imágenes se cargarán dinámicamente con JavaScript -->
       </div>
       <!-- Indicadores del carousel -->
       <div class="carousel-indicators absolute bottom-2 left-1/2 transform -translate-x-1/2 flex space-x-2">
-        <button class="carousel-indicator w-3 h-3 rounded-full bg-white bg-opacity-50 border border-white" data-index="0"></button>
-        <button class="carousel-indicator w-3 h-3 rounded-full bg-white bg-opacity-50 border border-white" data-index="1"></button>
+        <button class="carousel-indicator w-2 h-2 md:w-3 md:h-3 rounded-full bg-white bg-opacity-50 border border-white" data-index="0"></button>
+        <button class="carousel-indicator w-2 h-2 md:w-3 md:h-3 rounded-full bg-white bg-opacity-50 border border-white" data-index="1"></button>
       </div>
     </div>
   </section>
@@ -27,14 +27,14 @@ import ContactModal from "./ContactModal.astro";
   <nav class="bg-yellow-400 mx-auto px-4 py-4 flex justify-between items-center">
     <!-- Logo -->
     <div class="flex items-center">
-      <img src="/logo.png" alt="Logo" class="h-14">
+      <img src="/logo.png" alt="Logo" class="h-10 md:h-14">
     </div>
 
     <!-- Menú de navegación (visible en desktop) -->
     <div class="hidden md:flex space-x-6">
       <a href="#"
          class="hover:text-blue-600 font-medium"
-         onclick="document.getElementById('contact-modal').classList.remove('hidden')">
+         onclick="openContactModal()">
         Publicidad
       </a>
       <a href="/pdf/indicadores.pdf" class="hover:text-blue-600 font-medium">Indicadores</a>
@@ -74,7 +74,7 @@ import ContactModal from "./ContactModal.astro";
       <!-- Enlaces del primer navbar -->
       <a href="#publicidad"
          class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50"
-         onclick="event.preventDefault(); document.getElementById('contact-modal').classList.remove('hidden')">
+         onclick="openContactModal()">
         Publicidad
       </a>
       <a href="/pdf/indicadores.pdf" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50">Indicadores</a>
@@ -93,21 +93,36 @@ import ContactModal from "./ContactModal.astro";
     </div>
   </div>
   
-  <ContactModal />
+  <ContactModal client:load />
 </header>
 
 <script>
-  // Toggle mobile menu
+  // Función para abrir el modal
+  function openContactModal() {
+    const modal = document.querySelector('contact-modal');
+    if (modal && modal.showModal) {
+      modal.showModal();
+    } else {
+      console.error('Modal no encontrado o no tiene método showDialog');
+      // Fallback: buscar por id si es necesario
+      const modalById = document.getElementById('contact-modal');
+      if (modalById) {
+        modalById.classList.remove('hidden');
+      }
+    }
+  }
+
+  // Toggle mobile menu (sin duplicación)
   document.getElementById('mobile-menu-button').addEventListener('click', function() {
     const menu = document.getElementById('mobile-menu');
     menu.classList.toggle('hidden');
   });
 
-
-  // Toggle mobile menu
-  document.getElementById('mobile-menu-button').addEventListener('click', function() {
-    const menu = document.getElementById('mobile-menu');
-    menu.classList.toggle('hidden');
+  // Cerrar menú móvil al hacer clic en un enlace
+  document.querySelectorAll('#mobile-menu a').forEach(link => {
+    link.addEventListener('click', function() {
+      document.getElementById('mobile-menu').classList.add('hidden');
+    });
   });
 
   // Carousel functionality
@@ -126,31 +141,27 @@ import ContactModal from "./ContactModal.astro";
       const img = document.createElement('img');
       img.src = imgSrc;
       img.alt = `Banner ${index + 1}`;
-      img.className = 'min-w-full h-[150px] object-cover';
+      img.className = 'min-w-full h-[90px] md:h-[150px] object-cover';
       carousel.appendChild(img);
     });
 
-    // Resto del código del carousel (igual que antes)...
-    // Clonar la primera y última imagen para efecto infinito
+    // Resto del código del carousel...
     const firstClone = carousel.children[0].cloneNode(true);
     const lastClone = carousel.children[carousel.children.length - 1].cloneNode(true);
 
     carousel.appendChild(firstClone);
     carousel.insertBefore(lastClone, carousel.firstChild);
 
-    let currentIndex = 1; // Comenzar en el primer elemento real (no el clon)
+    let currentIndex = 1;
     const totalSlides = images.length;
-    const slideWidth = 100; // Porcentaje
+    const slideWidth = 100;
 
-    // Posicionar inicialmente el carousel
     carousel.style.transform = `translateX(-${currentIndex * slideWidth}%)`;
 
-    // Función para actualizar el carousel
     function updateCarousel() {
       carousel.style.transition = 'transform 0.5s ease-in-out';
       carousel.style.transform = `translateX(-${currentIndex * slideWidth}%)`;
 
-      // Actualizar indicadores
       indicators.forEach((indicator, index) => {
         if (index === (currentIndex - 1 + totalSlides) % totalSlides) {
           indicator.classList.remove('bg-opacity-50');
@@ -162,18 +173,15 @@ import ContactModal from "./ContactModal.astro";
       });
     }
 
-    // Función para ir al slide específico
     function goToSlide(index) {
-      currentIndex = index + 1; // +1 por el clon inicial
+      currentIndex = index + 1;
       updateCarousel();
     }
 
-    // Función para siguiente slide
     function nextSlide() {
       currentIndex++;
       updateCarousel();
 
-      // Si llegamos al final (el clon), reposicionar sin animación
       if (currentIndex === totalSlides + 1) {
         setTimeout(() => {
           carousel.style.transition = 'none';
@@ -183,12 +191,10 @@ import ContactModal from "./ContactModal.astro";
       }
     }
 
-    // Función para slide anterior
     function prevSlide() {
       currentIndex--;
       updateCarousel();
 
-      // Si llegamos al inicio (el clon), reposicionar sin animación
       if (currentIndex === 0) {
         setTimeout(() => {
           carousel.style.transition = 'none';
@@ -198,14 +204,12 @@ import ContactModal from "./ContactModal.astro";
       }
     }
 
-    // Event listeners para los indicadores
     indicators.forEach((indicator, index) => {
       indicator.addEventListener('click', () => {
         goToSlide(index);
       });
     });
 
-    // Cambio automático cada 5 segundos
     setInterval(nextSlide, 5000);
   });
 </script>
