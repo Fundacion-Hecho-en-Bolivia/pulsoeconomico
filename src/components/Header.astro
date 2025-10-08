@@ -1,11 +1,7 @@
----
-import ContactModal from "./ContactModal.astro";
----
-
 <header class="bg-white shadow-md">
     <!-- Sección de publicidad con carousel -->
   <section class="publi flex justify-center items-center bg-gray-100 py-2">
-    <div class="carousel-container relative w-full max-w-[1275px] h-[90px] md:h-[150px] overflow-hidden">
+    <div class="carousel-container relative w-full h-[90px] md:h-[150px] overflow-hidden">
       <div id="carousel" class="carousel-slides flex transition-transform duration-500 ease-in-out">
         <!-- Las imágenes se cargarán dinámicamente con JavaScript -->
       </div>
@@ -19,7 +15,7 @@ import ContactModal from "./ContactModal.astro";
   <!-- Topbar -->
   <section class="bg-red-600 text-white py-1 px-4">
     <div class="container mx-auto flex justify-end">
-      <a href="https://fundacion.vercel.app/" class="text-sm md:text-lg font-medium hover:underline">Fundación Hecho en Bolivia</a>
+      <a href="https://www.fundacionhechoenbolivia.com/fundacionhb/" class="text-sm md:text-lg font-medium hover:underline">Fundación Hecho en Bolivia</a>
     </div>
   </section>
 
@@ -93,7 +89,6 @@ import ContactModal from "./ContactModal.astro";
     </div>
   </div>
   
-  <ContactModal client:load />
 </header>
 
 <script>
