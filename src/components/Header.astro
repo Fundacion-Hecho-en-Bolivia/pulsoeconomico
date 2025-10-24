@@ -136,7 +136,7 @@
       const img = document.createElement('img');
       img.src = imgSrc;
       img.alt = `Banner ${index + 1}`;
-      img.className = 'min-w-full h-[90px] md:h-[150px] object-cover';
+      img.className = 'min-w-full h-[90px] md:h-[150px] object-contain md:object-cover';
       carousel.appendChild(img);
     });
 
